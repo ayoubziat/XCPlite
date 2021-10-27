@@ -97,9 +97,8 @@ extern int _kbhit();
 #endif
 
 
+#ifdef __cplusplus
+}  /* extern "C" */
 #endif
 
-
-#ifdef __cplusplus
-}
 #endif

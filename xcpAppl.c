@@ -227,11 +227,11 @@ vuint8 ApplXcpGetA2LFilename(char** p, vuint32* n, int path) {
     sprintf(gA2LPathname, "%s%s.A2L", gOptionA2L_Path, gA2LFilename);
 
     if (path) {
-        if (p != NULL) *p = (vuint8*)gA2LPathname;
+        if (p != NULL) *p = (char*)gA2LPathname;
         if (n != NULL) *n = (vuint32)strlen(gA2LPathname);
     }
     else {
-        if (p != NULL) *p = (vuint8*)gA2LFilename;
+        if (p != NULL) *p = (char*)gA2LFilename;
         if (n != NULL) *n = (vuint32)strlen(gA2LFilename);
     }
     return 1;
