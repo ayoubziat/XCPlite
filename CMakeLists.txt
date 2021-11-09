@@ -22,7 +22,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 target_link_libraries(${XCPLITE_NAME} PRIVATE Threads::Threads)
 
-add_library(${XCPLITE_NAME}-src-lib SHARED ${XCPLITE_SOURCES})
+add_library(${XCPLITE_NAME}-src-lib STATIC ${XCPLITE_SOURCES})
 target_link_libraries (${XCPLITE_NAME}-src-lib PRIVATE ${Boost_LIBRARIES} ${USE_RT} ${DL_LIBRARY} ${DLT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${OS_LIBS})
 
 file(GLOB_RECURSE XCPLITE_INCLUDE RELATIVE ${INCLUDE_PATH} "*.h" "*.hpp")
@@ -32,13 +32,13 @@ foreach( file ${XCPLITE_INCLUDE} )
     install( FILES "${INCLUDE_PATH}/${file}" DESTINATION "${INSTALL_INCLUDE_DIR}/xcpLite/${dir}" COMPONENT dev)
 endforeach()
 
-# install(
-#     TARGETS ${XCPLITE_NAME} 
-#     EXPORT xcpLiteTargets
-#     RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT
-#     LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT
-#     COMPONENT dev
-# )
+install(
+    TARGETS ${XCPLITE_NAME} 
+    EXPORT xcpLiteTargets
+    RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT
+    LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT
+    COMPONENT dev
+)
 
 install(
     TARGETS ${XCPLITE_NAME}-src-lib
