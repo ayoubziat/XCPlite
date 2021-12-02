@@ -12,7 +12,7 @@
 |
  ----------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "configuration.h"
 
 
 // Commandline Options amd Defaults
@@ -229,7 +229,7 @@ int main(int argc, char* argv[]) {
                 printf("\nPress ESC to stop\n");
                 pthread_join(t1, NULL); // wait here, main loop terminates on key ESC or when the XCP threads terminate
                 pthread_cancel(t2);
-                pthread_cancel(t3);
+                // pthread_cancel(t3);
 
 #endif // _LINUX
 

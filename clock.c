@@ -10,7 +10,7 @@
 | Code released into public domain, no attribution required
  ----------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "configuration.h"
 #include "clock.h"
 
 

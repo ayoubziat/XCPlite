@@ -169,6 +169,7 @@
     <ClInclude Include="ecu.h" />
     <ClInclude Include="ecupp.hpp" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="configuration.h" />
     <ClInclude Include="udp.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vxlapi.h" />

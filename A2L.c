@@ -10,10 +10,10 @@
 |
  ----------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "configuration.h"
 #include "A2L.h"
 
-#ifdef APP_ENABLE_A2L_GEN
+// #ifdef APP_ENABLE_A2L_GEN
 
 static FILE* gA2lFile = NULL;
 static int gA2lEvent = 0;
@@ -440,5 +440,5 @@ void A2lClose() {
 }
 
 
-#endif
+// #endif
 

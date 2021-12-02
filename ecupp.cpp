@@ -11,7 +11,7 @@
  */
 
 
-#include "main.h"
+#include "configuration.h"
 #include "ecupp.hpp"
 
 #ifdef APP_ENABLE_A2L_GEN

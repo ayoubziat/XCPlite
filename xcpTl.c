@@ -12,7 +12,7 @@
 |
  ----------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "configuration.h"
 #include "xcpTl.h"
 
 static void xcpTlInitDefaults();
@@ -743,7 +743,7 @@ static void xcpTlInitDefaults() {
     uint8_t uuid[8] = APP_DEFAULT_SLAVE_UUID;
     uint32_t a;
     uint8_t m[6];
-
+    
 #ifdef APP_ENABLE_XLAPI_V3
     if (gOptionUseXLAPI) {
 
