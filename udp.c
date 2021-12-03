@@ -10,7 +10,7 @@
 |
  ----------------------------------------------------------------------------*/
 
-#include "configuration.h"
+#include "main.h"
 
 #ifdef _WIN 
 #ifdef APP_ENABLE_XLAPI_V3

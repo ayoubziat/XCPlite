@@ -8,7 +8,7 @@
 |   Code released into public domain, no attribution required
  ----------------------------------------------------------------------------*/
 
-#include "configuration.h"
+#include "main.h"
 #include "util.h"
 
 

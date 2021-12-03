@@ -7,7 +7,7 @@
 #ifndef __XCPAPPL_H_ 
 #define __XCPAPPL_H_
 
-#include "configuration.h"
+#include "main.h"
 
 
 #ifdef __cplusplus
@@ -47,14 +47,6 @@ extern "C" {
 #endif
 #endif
 
-
-// #ifdef XCP_ENABLE_A2L_NAME
-// extern vuint8 ApplXcpGetA2LFilename(char** p, vuint32* n, int path);
-
-// // A2L base name for GET_ID 
-extern char gA2LPathname[MAX_PATH + 100 + 4]; // Full path + name +extension
-
-// #endif
 
 /*----------------------------------------------------------------------------*/
 // Event list for GET_EVENT_INFO command and XcpEvent optimization

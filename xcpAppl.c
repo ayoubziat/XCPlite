@@ -12,7 +12,7 @@
 |
  ----------------------------------------------------------------------------*/
 
-#include "configuration.h"
+#include "main.h"
 
 #ifdef XCP_ENABLE_GRANDMASTER_CLOCK_INFO
 
@@ -214,16 +214,16 @@ vuint16 XcpCreateEvent(const char* name, vuint16 cycleTime /*ms */, vuint16 samp
 
 #ifdef XCP_ENABLE_A2L_NAME // Enable GET_ID A2L name upload to host
 
-char gA2LFilename[100]; // Name without extension
+static char gA2LFilename[100]; // Name without extension
 
 // A2L base name for GET_ID 
-char gA2LPathname[MAX_PATH + 100 + 4]; // Full path + name +extension
+static char gA2LPathname[MAX_PATH + 100 + 4]; // Full path + name +extension
 
 
 vuint8 ApplXcpGetA2LFilename(char** p, vuint32* n, int path) {
 
     // Create a unique A2L file name for this build
-    sprintf(gA2LFilename, a2l_filename); // Generate version specific unique A2L file name
+    sprintf(gA2LFilename, APP_NAME "-%08X-%u", ApplXcpGetAddr((vuint8*)&ecuPar),gOptionSlavePort); // Generate version specific unique A2L file name
     sprintf(gA2LPathname, "%s%s.A2L", gOptionA2L_Path, gA2LFilename);
 
     if (path) {

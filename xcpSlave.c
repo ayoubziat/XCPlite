@@ -12,7 +12,7 @@
 |
 -----------------------------------------------------------------------------*/
 
-#include "configuration.h"
+#include "main.h"
 #include "xcpSlave.h"
 
  

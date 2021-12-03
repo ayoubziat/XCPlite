@@ -91,7 +91,7 @@
     <ClInclude Include="clock.h" />
     <ClInclude Include="ecu.h" />
     <ClInclude Include="ecupp.hpp" />
-    <ClInclude Include="configuration.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="xcpLite.h" />
     <ClInclude Include="xcpAppl.h" />
