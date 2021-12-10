@@ -17,7 +17,7 @@ char gOptionXlSlaveSeg[32] = APP_DEFAULT_SLAVE_XL_SEG;
 #endif
 #endif 
 
-// Infos needed by createA2L()
+// Infos needed by A2lHeader() in A2L.c
 char* getA2lSlaveIP() {
     static char tmp[32];
     inet_ntop(AF_INET, &gXcpTl.SlaveAddr.addr.sin_addr, tmp, sizeof(tmp));

@@ -16,12 +16,12 @@
 
 
 // Commandline Options amd Defaults
-volatile unsigned int gDebugLevel = APP_DEFAULT_DEBUGLEVEL;
-char gOptionA2L_Path[MAX_PATH] = APP_DEFAULT_A2L_PATH;
-int gOptionJumbo = APP_DEFAULT_JUMBO;
-unsigned char gOptionSlaveAddr[4] = { 127,0,0,1 };
-uint16_t gOptionSlavePort = APP_DEFAULT_SLAVE_PORT;
-int gOptionUseXLAPI = FALSE;
+// volatile unsigned int gDebugLevel = APP_DEFAULT_DEBUGLEVEL;
+// char gOptionA2L_Path[MAX_PATH] = APP_DEFAULT_A2L_PATH;
+// int gOptionJumbo = APP_DEFAULT_JUMBO;
+// unsigned char gOptionSlaveAddr[4] = { 127,0,0,1 };
+// uint16_t gOptionSlavePort = APP_DEFAULT_SLAVE_PORT;
+// int gOptionUseXLAPI = FALSE;
 
 #ifdef _WIN 
 #ifdef APP_ENABLE_XLAPI_V3
@@ -32,61 +32,61 @@ char gOptionXlSlaveSeg[32] = APP_DEFAULT_SLAVE_XL_SEG;
 
 
 // Infos needed by createA2L()
-char* getA2lSlaveIP() {
-    static char tmp[32];
-    inet_ntop(AF_INET, &gXcpTl.SlaveAddr.addr.sin_addr, tmp, sizeof(tmp));
-    return tmp;
-}
+// char* getA2lSlaveIP() {
+//     static char tmp[32];
+//     inet_ntop(AF_INET, &gXcpTl.SlaveAddr.addr.sin_addr, tmp, sizeof(tmp));
+//     return tmp;
+// }
 
-uint16_t getA2lSlavePort() {
-    return htons(gXcpTl.SlaveAddr.addr.sin_port);
-}
+// uint16_t getA2lSlavePort() {
+//     return htons(gXcpTl.SlaveAddr.addr.sin_port);
+// }
 
-// Create A2L file
-// Create MDF header for all measurements
-#ifdef APP_ENABLE_A2L_GEN
-int createA2L(const char* a2l_path_name) {
+// // Create A2L file
+// // Create MDF header for all measurements
+// #ifdef APP_ENABLE_A2L_GEN
+// int createA2L(const char* a2l_path_name) {
 
-    if (!A2lInit(a2l_path_name)) return 0;
-    A2lHeader();
-    ecuCreateA2lDescription();
-    ecuppCreateA2lDescription();
-    A2lCreateParameterWithLimits(gDebugLevel, "Console output verbosity", "", 0, 100);
-    A2lClose();
-    return 1;
-}
-#endif
+//     if (!A2lInit(a2l_path_name)) return 0;
+//     A2lHeader();
+//     // ecuCreateA2lDescription();
+//     // ecuppCreateA2lDescription();
+//     A2lCreateParameterWithLimits(gDebugLevel, "Console output verbosity", "", 0, 100);
+//     A2lClose();
+//     return 1;
+// }
+// #endif
 
 
 // Main task
-#ifdef _WIN
-DWORD WINAPI mainTask(LPVOID lpParameter)
-#else
-extern void* mainTask(void* par)
-#endif
-{
-    for (;;) {
+// #ifdef _WIN
+// DWORD WINAPI mainTask(LPVOID lpParameter)
+// #else
+// extern void* mainTask(void* par)
+// #endif
+// {
+//     for (;;) {
         
-        sleepMs(1000);
+//         sleepMs(1000);
 
-        // Check if the XCP threads are is running
-        if (!gXcpSlaveCMDThreadRunning || !gXcpSlaveDAQThreadRunning) {
-            printf("\nXCP slave failed (CMD=%u, DAQ=%u)\n",gXcpSlaveCMDThreadRunning, gXcpSlaveDAQThreadRunning);
-            break;
-        }
+//         // Check if the XCP threads are is running
+//         if (!gXcpSlaveCMDThreadRunning || !gXcpSlaveDAQThreadRunning) {
+//             printf("\nXCP slave failed (CMD=%u, DAQ=%u)\n",gXcpSlaveCMDThreadRunning, gXcpSlaveDAQThreadRunning);
+//             break;
+//         }
 
-        // Check keyboard
-        if (_kbhit()) {
-            int c = _getch();
-            if (c == 27) {
-                XcpSendEvent(EVC_SESSION_TERMINATED, NULL, 0);
-                break;
-            }
-        }
-    }
+//         // Check keyboard
+//         if (_kbhit()) {
+//             int c = _getch();
+//             if (c == 27) {
+//                 XcpSendEvent(EVC_SESSION_TERMINATED, NULL, 0);
+//                 break;
+//             }
+//         }
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 
 // help
@@ -187,76 +187,76 @@ int main(int argc, char* argv[]) {
     printf("\n");
 
     // Init network
-    if (networkInit()) {
+    // if (networkInit()) {
 
-        // Init clock 
-        if (clockInit()) {
+    //     // Init clock 
+    //     if (clockInit()) {
 
-            // Initialize the XCP slave
-            if (xcpSlaveInit()) {
+    //         // Initialize the XCP slave
+    //         if (xcpSlaveInit()) {
 
-                // Initialize ECU demo task (C) 
-                ecuInit();
+    //             // Initialize ECU demo task (C) 
+    //             ecuInit();
 
-                // Initialize ECU demo tasks (C++) 
-                ecuppInit();
+    //             // Initialize ECU demo tasks (C++) 
+    //             ecuppInit();
 
-    #ifdef APP_ENABLE_A2L_GEN
-                // Create A2L/MDI names and generate A2L file
-                printf("\n");
-                char* filepath; // Full path + name +extension
-                ApplXcpGetA2LFilename(&filepath, NULL, TRUE);
-                createA2L(filepath);
-    #endif
-                printf("\n");
+    // #ifdef APP_ENABLE_A2L_GEN
+    //             // Create A2L/MDI names and generate A2L file
+    //             printf("\n");
+    //             char* filepath; // Full path + name +extension
+    //             ApplXcpGetA2LFilename(&filepath, NULL, TRUE);
+    //             createA2L(filepath);
+    // #endif
+    //             printf("\n");
 
 #ifdef _LINUX
-                // Demo threads
-                pthread_t t3;
-                int a3 = 0;
-                pthread_create(&t3, NULL, ecuppTask, (void*)&a3);
-                pthread_t t2;
-                int a2 = 0;
-                pthread_create(&t2, NULL, ecuTask, (void*)&a2);
+                // // Demo threads
+                // pthread_t t3;
+                // int a3 = 0;
+                // pthread_create(&t3, NULL, ecuppTask, (void*)&a3);
+                // pthread_t t2;
+                // int a2 = 0;
+                // pthread_create(&t2, NULL, ecuTask, (void*)&a2);
 
-                // Main loop
-                pthread_t t1;
-                int a1 = 0;
-                pthread_create(&t1, NULL, mainTask, (void*)&a1);
+                // // Main loop
+                // pthread_t t1;
+                // int a1 = 0;
+                // pthread_create(&t1, NULL, mainTask, (void*)&a1);
 
-                // Exit
-                sleepMs(1000); // give everything a chance to be up and running
-                printf("\nPress ESC to stop\n");
-                pthread_join(t1, NULL); // wait here, main loop terminates on key ESC or when the XCP threads terminate
-                pthread_cancel(t2);
-                // pthread_cancel(t3);
+                // // Exit
+                // sleepMs(1000); // give everything a chance to be up and running
+                // printf("\nPress ESC to stop\n");
+                // pthread_join(t1, NULL); // wait here, main loop terminates on key ESC or when the XCP threads terminate
+                // pthread_cancel(t2);
+                // // pthread_cancel(t3);
 
 #endif // _LINUX
 
 #ifdef _WIN
                 // Demo threads
-                std::thread t2([]() { ecuTask(0); });
-                std::thread t3([]() { ecuppTask(0); });
+                // std::thread t2([]() { ecuTask(0); });
+                // std::thread t3([]() { ecuppTask(0); });
 
-                // Main loop
-                Sleep(100); // give everything a chance to be up and running
-                printf("\nPress ESC to stop\n");
-                std::thread t0([]() { mainTask(0); });
+                // // Main loop
+                // Sleep(100); // give everything a chance to be up and running
+                // printf("\nPress ESC to stop\n");
+                // std::thread t0([]() { mainTask(0); });
 
-                // Exit
-                t0.join(); // wait here, main loop terminates on key ESC or when the XCP threads terminate
-                t2.detach();
-                t3.detach();
+                // // Exit
+                // t0.join(); // wait here, main loop terminates on key ESC or when the XCP threads terminate
+                // t2.detach();
+                // t3.detach();
 
 #endif // _WIN
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     printf("Shutdown\n");
-    xcpSlaveShutdown();
+    // xcpSlaveShutdown();
       
-    networkShutdown();
+    // networkShutdown();
     printf("\nPress any key to close\n");
     while (!_kbhit()) sleepMs(100);
     return 0;
